@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <script th:src="@{/js/jquery-3.4.1.js}"></script>
+    <script>
+        var $uname, $pwd, $btn_login, $info;
+        $(function () {
+            $uname = $("#uname");
+            $pwd = $("#pwd");
+            $btn_login = $("#btn_login");
+            $info = $("#info");
+            $btn_login.click(function () {
+                $.post("[[@{/login}]]", {
+                    uname: $uname.val(),
+                    pwd: $pwd.val()
+                }, function (data) {
+                    $info.html(data);
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="info"></div>
+用户名:<input type="text" id="uname">
+密码:<input type="password" id="pwd">
+<button type="button" id="btn_login">登录</button>
+
+
+<form th:action="@{/login}" th:method="post">
+    用户名:<input type="text" name="uname">
+    密码:<input type="password" name="pwd">
+    <input type="submit" value="提交提交">
+</form>
+</body>
+</html>
